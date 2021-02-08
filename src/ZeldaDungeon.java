@@ -25,6 +25,7 @@ public class ZeldaDungeon {
 		gameFrame.setSize(WIDTH, HEIGHT+20);
 		gameFrame.setVisible(true);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameFrame.addKeyListener(gamePanel);
 	}
 
 }
