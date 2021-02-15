@@ -13,13 +13,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int TITLE = 0;
 	final int GAME = 1;
 	final int END = 2;
-	int currentState = END;
+	int currentState = TITLE;
+	
+	ObjectManager objectManager = new ObjectManager();
 	
 	Timer frameDraw;
 	
 	Font titleFont = new Font("Zapfino", Font.PLAIN, 48);
 	Font headerFont = new Font("Apple Chancery", Font.PLAIN, 35);
-	Font endFont = new Font("", Font.BOLD, 48);
+	
 	
 	GamePanel() {
 		frameDraw = new Timer(1000/60,this);
@@ -31,13 +33,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	void updateGameState() {
-		
+		objectManager.update();
 	}
 	void updateEndState() {
 		
 	}
 	
-	//Draw method's update the USER'S DISPLAY's version of the game
+	//Draw methods update the USER'S DISPLAY's version of the game
 	void drawTitleState(Graphics g) {
 		g.setColor(new Color(0,200,100));
 		g.fillRect(0, 0, ZeldaDungeon.WIDTH, ZeldaDungeon.HEIGHT);
@@ -56,14 +58,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, ZeldaDungeon.WIDTH, ZeldaDungeon.HEIGHT);
+		
+		objectManager.draw(g);
 	}
 	void drawEndState(Graphics g) {
 		g.setColor(new Color(60,0,60));
 		g.fillRect(0, 0, ZeldaDungeon.WIDTH, ZeldaDungeon.HEIGHT);
 		
-		g.setColor(new Color(100,0,100));
+		g.setColor(new Color(130,0,130));
+		g.setFont(titleFont);
+		g.drawString("GAME OVER", 100, 175);
+		
+		g.setColor(new Color(135,0,135));
 		g.setFont(headerFont);
-		g.drawString("GAME OVER", 169, 175);
+		g.drawString(">Press ENTER to return to the tittle screen<", 60, 450);
 	}
 	
 	@Override
