@@ -97,7 +97,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			//Switches the state
+			//Switches the state in all states
 			System.out.println("Enter");
 			if (currentState == END) {
 				currentState = TITLE;
@@ -105,12 +105,40 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				currentState++;
 			}
 				
+		} else if (currentState == GAME) {
+			//Controls in GAME state
+			
+			//Player movement
+			if(e.getKeyCode() == KeyEvent.VK_W) {
+				objectManager.player.moveUp = true;
+			} else if(e.getKeyCode() == KeyEvent.VK_A) {
+				objectManager.player.moveLeft = true;
+			} else if(e.getKeyCode() == KeyEvent.VK_S) {
+				objectManager.player.moveDown = true;
+			} else if(e.getKeyCode() == KeyEvent.VK_D) {
+				objectManager.player.moveRight = true;
+			}
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
+		if (currentState == GAME) {
+			//More controls in GAME state, specifically ending repeated actions/pressed states originating in keyPressed()
+			
+			//Ending player movement
+			if(e.getKeyCode() == KeyEvent.VK_W) {
+				objectManager.player.moveUp = false;
+			} else if(e.getKeyCode() == KeyEvent.VK_A) {
+				objectManager.player.moveLeft = false;
+			} else if(e.getKeyCode() == KeyEvent.VK_S) {
+				objectManager.player.moveDown = false;
+			} else if(e.getKeyCode() == KeyEvent.VK_D) {
+				objectManager.player.moveRight = false;
+			}
+		}
 		
 	}
 

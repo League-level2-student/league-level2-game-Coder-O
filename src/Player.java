@@ -4,7 +4,8 @@ import java.awt.Graphics;
 public class Player extends Entity {
 	
 	Player(int x, int y) {
-		super(x, y, 50, 50);  //Assuming player will always start out at the same size
+		super(x, y, 50, 50, 5);  //Assuming player will always start out at the same size
+		
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -14,6 +15,7 @@ public class Player extends Entity {
 	void draw(Graphics g) {
 		g.setColor(Color.BLUE);
 		super.draw(g);
+		//System.out.println("Player Draw");
 	}
 	
 }

@@ -14,12 +14,14 @@ public class Entity {
 	boolean moveRight = false;
 	Rectangle collisionBox;
 	
-	Entity(int x, int y, int width, int height) {
+	Entity(int x, int y, int width, int height, int speed) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.speed = speed;
 		collisionBox = new Rectangle(x, y, width, height);
+		
 		
 	}
 	
@@ -31,6 +33,7 @@ public class Entity {
 		right();
 		
 		collisionBox.setBounds(x, y, width, height);
+		//System.out.println("Update");
 		
 	}
 	
@@ -40,6 +43,7 @@ public class Entity {
 	
 	//Controlled movement
 	void up() {
+		
 		if (moveUp&&y>0) {  //possibly need to say this.moveUp(), same for rest of movement methods. <- Research suggests this is unlikely.
 			y-=speed;
 		}
