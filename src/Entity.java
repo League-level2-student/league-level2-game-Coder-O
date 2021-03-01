@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Area;
 
 public class Entity {
 	int x;
@@ -42,6 +44,12 @@ public class Entity {
 	}
 	
 	//Controlled movement
+	public static boolean testIntersection(Shape shapeA, Shape shapeB) {
+		Area areaA = new Area(shapeA);
+		areaA.intersect(new Area(shapeB));
+		return !areaA.isEmpty();
+	}
+	
 	void up() {
 		
 		if (moveUp&&y>0) {  //possibly need to say this.moveUp(), same for rest of movement methods. <- Research suggests this is unlikely.

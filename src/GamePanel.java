@@ -14,6 +14,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME = 1;
 	final int END = 2;
 	int currentState = TITLE;
+	boolean pause = false;
 	
 	ObjectManager objectManager = new ObjectManager();
 	
@@ -35,6 +36,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		objectManager.update();
 	}
+	
+	void updatePauseSubstate() {
+		
+	}
+	
 	void updateEndState() {
 		
 	}
@@ -55,12 +61,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 		
 	}
+	
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, ZeldaDungeon.WIDTH, ZeldaDungeon.HEIGHT);
 		
 		objectManager.draw(g);
 	}
+	void drawPauseSubstate(Graphics g) {
+		g.setColor(new Color(100,100,100,100));
+		g.fillRect(0, 0, ZeldaDungeon.WIDTH, ZeldaDungeon.HEIGHT);
+		
+		g.setColor(Color.WHITE);
+		g.setFont(headerFont);
+		g.drawString("Pause", 100, 175);
+	}
+
 	void drawEndState(Graphics g) {
 		g.setColor(new Color(60,0,60));
 		g.fillRect(0, 0, ZeldaDungeon.WIDTH, ZeldaDungeon.HEIGHT);
@@ -81,6 +97,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		    drawTitleState(g);
 		}else if(currentState == GAME){
 		    drawGameState(g);
+		    if (pause) {
+		    	drawPauseSubstate(g);
+		    }
 		}else if(currentState == END){
 		    drawEndState(g);
 		}
@@ -95,7 +114,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			//Switches the state in all states
 			System.out.println("Enter");
@@ -104,12 +122,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			} else {
 				currentState++;
 			}
-				
 		} else if (currentState == GAME) {
 			//Controls in GAME state
 			
+			//Pause
+			if (e.getKeyCode() == KeyEvent.VK_E) {
+				pause = !pause;
+			}
+			
 			//Player movement
-			if(e.getKeyCode() == KeyEvent.VK_W) {
+			else if(e.getKeyCode() == KeyEvent.VK_W) {
 				objectManager.player.moveUp = true;
 			} else if(e.getKeyCode() == KeyEvent.VK_A) {
 				objectManager.player.moveLeft = true;
@@ -146,12 +168,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		// Called 60 times per second by timers (Specifically, frameDraw)
-		if(currentState == TITLE){
-		    updateTitleState();
-		}else if(currentState == GAME){
-		    updateGameState();
-		}else if(currentState == END){
-		    updateEndState();
+		if(!pause) {
+			if(currentState == TITLE){
+			    updateTitleState();
+			}else if(currentState == GAME){
+			    updateGameState();
+			}else if(currentState == END){
+			    updateEndState();
+			}
+		} else {
+			updatePauseSubstate();
 		}
 		
 		//Essentially calls paintComponent()
