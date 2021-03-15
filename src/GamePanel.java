@@ -17,6 +17,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	boolean pause = false;
 	
 	ObjectManager objectManager = new ObjectManager();
+	RoomManager roomManager = new RoomManager();
 	
 	Timer frameDraw;
 	
@@ -66,6 +67,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, ZeldaDungeon.WIDTH, ZeldaDungeon.HEIGHT);
 		
+		roomManager.draw(g);
 		objectManager.draw(g);
 	}
 	void drawPauseSubstate(Graphics g) {
@@ -113,6 +115,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println("Key pressed");
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			//Switches the state in all states
@@ -146,7 +149,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Key released");
 		if (currentState == GAME) {
 			//More controls in GAME state, specifically ending repeated actions/pressed states originating in keyPressed()
 			

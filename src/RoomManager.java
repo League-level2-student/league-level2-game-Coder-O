@@ -1,17 +1,33 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class RoomManager {
 //Manages rooms, sets them up.
-	
 	Dungeon dungeon1;
 	
 	Dungeon loadedDungeon;
+	
+	Room loadedRoom;
 	
 	
 	
 	
 	
 	RoomManager() {
+		createDungeon();
+		loadedDungeon = dungeon1;
+		loadedRoom = loadedDungeon.startingRoom;
+	}
+	
+	void draw(Graphics g) {
+		loadedRoom.draw(g);
+	}
+	
+	void createDungeon() {
+	//Constant space that initializes the dungeon map. Where the programmer manually inputs the layout of the dungeon and each room.
+		
+		//Overall map of all rooms
 		dungeon1 = new Dungeon(new Room[/*Floor*/][/*Row*/][/*Column*/] {
 			{ //FLoor 2
 				{    null   ,    null   ,    null   ,    null    },
@@ -24,30 +40,48 @@ public class RoomManager {
 				{    null   , new Room(),    null   ,    null    }
 			},
 		});
-		loadedDungeon = dungeon1;
-		dungeon1.dungeonMap[1][3][2].roomMap = new roomObject[][] {
-			{/* 16 floors/walls/traps/etc.*/},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{},
-			{}
-		};
 		
+	//Map of each room
+		//Entrance room
+		dungeon1.dungeonMap[1][2][1].roomMap = new roomObject[][] {
+			{new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(2),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)}
+		};
+	//Initialize processes
+		//sets starting room
+		dungeon1.startingRoom = dungeon1.dungeonMap[1][2][1];
+		
+		//For every room in the dungeon...
+		for (Room[][] floor : dungeon1.dungeonMap) {
+			for (Room[] row : floor) {
+				for (Room room : row) {
+					//Initialize each of it's object's coordinates.
+					if(room!= null&&room.roomMap!=null) {                //<––––––––––Delete room.roomMap!=null after all rooms have been formed!!!!!! It is unnecessary.
+						int y = 0;
+						for (roomObject[] roomRow : room.roomMap) {
+							int x = 0;
+							for (roomObject object : roomRow) {
+								object.cornerY = y*100;
+								object.cornerX = x*100;
+								x++;
+							}
+							y++;
+						}
+					}
+				}
+			}
+		}
 	}
 	
-	
 }
+
+/*–––––––––––––––––––––––––––––––––––––––––––– Dungeon Classes ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 
 class Dungeon {
 	Room startingRoom;
@@ -60,14 +94,23 @@ class Dungeon {
 }
 
 class Room {
-	//Each room is a 16 by 16 grid off 50 pxl by 50 pxl squares. Each square can hold one object, such as a wall, a floor, a pit, etc.
+	//Each room is a 8 by 8 grid off 100 pxl by 100 pxl squares. Each square can hold one object, such as a wall, a floor, a pit, etc.
 	roomObject[][] roomMap;
+
+	public void draw(Graphics g) {
+		// TODO Auto-generated method stub
+		for (roomObject[] row : roomMap) {
+			for (roomObject object : row) {
+				object.draw(g);
+			}
+		}
+	}
 	
 	
 }
 
 
-/*–––––––––––––––––––––––––––––––––––––––––––Room Object Stuff––––––––––––––––––––––––––––––––––––––––––––––––*/
+/*––––––––––––––––––––––––––––––––––––––––––– Room Object Classes ––––––––––––––––––––––––––––––––––––––––––––––––*/
 
 
 class roomObject {
@@ -81,7 +124,7 @@ class roomObject {
 		this.type = type;
 	}
 	
-	void draw() {
+	void draw(Graphics g) {
 		
 	}
 }
@@ -113,6 +156,7 @@ class Trap extends roomObject {
 	
 }
 class Floor extends roomObject {
+	public static final int NORMAL = 1;
 	Object spawningObject;
 	Floor(int type) {
 		super(type);
@@ -123,6 +167,16 @@ class Floor extends roomObject {
 		super(type);
 		this.spawningObject = spawningObject;
 		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	void draw(Graphics g) {
+		if(type == NORMAL) {
+			g.setColor(Color.GREEN);
+		} else {
+			g.setColor(Color.GRAY);
+		}
+		g.fillRect(cornerX, cornerY, 100, 100);
 	}
 	
 }
