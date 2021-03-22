@@ -26,6 +26,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	
 	
 	GamePanel() {
+		
+		
 		frameDraw = new Timer(1000/60,this);
 	    frameDraw.start();
 	}
@@ -106,13 +108,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		    drawEndState(g);
 		}
 	}
-
+//–––––––––––––––––––––––––––––––––––––––Controls/Listeners––––––––––––––––––––––––––––––––––––––––––––//
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println("Key pressed");
@@ -166,7 +170,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		
 	}
+	
+//–––––––––––––––––––––––––––––Testing KeyBindings––––––––––––––––––––––––––//
 
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

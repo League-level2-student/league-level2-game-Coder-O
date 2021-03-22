@@ -44,10 +44,10 @@ public class RoomManager {
 	//Map of each room
 		//Entrance room
 		dungeon1.dungeonMap[1][2][1].roomMap = new roomObject[][] {
-			{new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(2),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP)},
+			{new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP)},
+			{new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Floor(1),new Floor(1),new Floor(1),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP)},
+			{new Floor(1),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Floor(1),new Floor(1),new Floor(1)},
 			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
 			{new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
 			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
@@ -140,6 +140,16 @@ class Wall extends roomObject {
 		super(type);
 		// TODO Auto-generated constructor stub
 	}
+	
+	@Override
+	void draw(Graphics g) {
+		if(type == NORMAL) {
+			g.setColor(Color.DARK_GRAY);
+		} else {
+			g.setColor(Color.GRAY);
+		}
+		g.fillRect(cornerX, cornerY, 100, 100);
+	}
 
 	
 }
@@ -152,7 +162,15 @@ class Trap extends roomObject {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	@Override
+	void draw(Graphics g) {
+		if(type == PIT_TRAP) {
+			g.setColor(Color.BLACK);
+		} else {
+			g.setColor(Color.GRAY);
+		}
+		g.fillRect(cornerX, cornerY, 100, 100);
+	}
 	
 }
 class Floor extends roomObject {
