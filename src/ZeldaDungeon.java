@@ -14,6 +14,8 @@ public class ZeldaDungeon {
 	public static final int HEIGHT = 800;
 	
 	Action switchState_Action = new SwitchState_Action();
+	Action pause_Action = new Pause_Action();
+	
 	Action playerUpStart_Action = new PlayerUpStart_Action();
 	Action playerUpStop_Action = new PlayerUpStop_Action();
 	Action playerDownStart_Action = new PlayerDownStart_Action();
@@ -39,9 +41,14 @@ public class ZeldaDungeon {
 		gameFrame.setSize(WIDTH, HEIGHT+20);
 		gameFrame.setVisible(true);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//gameFrame.addKeyListener(gamePanel);
 		
+		
+//––––––––––––––––––––––––––––––––––––––––––––Key Bindings–––––––––––––––––––––––––––––––––––––––––––––––––––––––//
+//Input map
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "switchState");
+		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_E, 0, false), "pause");
+		
+		//Player Movement
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false), "playerUpStart");
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true), "playerUpStop");
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, false), "playerDownStart");
@@ -51,7 +58,11 @@ public class ZeldaDungeon {
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, false), "playerRightStart");
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, true), "playerRightStop");
 		
+//Action map
 		gamePanel.getActionMap().put("switchState", switchState_Action);
+		gamePanel.getActionMap().put("pause", pause_Action);
+		
+		//Player Movement
 		gamePanel.getActionMap().put("playerUpStart", playerUpStart_Action);
 		gamePanel.getActionMap().put("playerUpStop", playerUpStop_Action);
 		gamePanel.getActionMap().put("playerDownStart", playerDownStart_Action);
@@ -62,7 +73,7 @@ public class ZeldaDungeon {
 		gamePanel.getActionMap().put("playerRightStop", playerRightStop_Action);
 		
 	}
-	
+//Actions
 	public class SwitchState_Action extends AbstractAction {
 
 		@Override
@@ -71,20 +82,37 @@ public class ZeldaDungeon {
 			if (gamePanel.currentState == gamePanel.END) {
 				gamePanel.currentState = gamePanel.TITLE;
 			} else {
+				if(gamePanel.currentState == gamePanel.GAME) {
+					gamePanel.pause = true;
+				}
 				gamePanel.currentState++;
 			}
-			System.out.println("Switch state");
+			
 		}
 		
 	}
 	
+	public class Pause_Action extends AbstractAction {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.pause = !gamePanel.pause;
+			}
+		}
+		
+	}
+	//Player Movement
 	public class PlayerUpStart_Action extends AbstractAction {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			gamePanel.objectManager.player.moveUp = true;
-			System.out.println("Player up start");
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.moveUp = true;
+			}
+			
 		}
 		
 	}
@@ -94,8 +122,9 @@ public class ZeldaDungeon {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			gamePanel.objectManager.player.moveUp = false;
-			System.out.println("Player up stop");
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.moveUp = false;
+			}
 		}
 		
 	}
@@ -105,8 +134,9 @@ public class ZeldaDungeon {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			gamePanel.objectManager.player.moveDown = true;
-			System.out.println("Player down start");
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.moveDown = true;
+			}
 		}
 		
 	}
@@ -116,8 +146,9 @@ public class ZeldaDungeon {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			gamePanel.objectManager.player.moveDown = false;
-			System.out.println("Player down stop");
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.moveDown = false;
+			}
 		}
 		
 	}
@@ -127,8 +158,9 @@ public class ZeldaDungeon {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			gamePanel.objectManager.player.moveLeft = true;
-			System.out.println("Player left start");
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.moveLeft = true;
+			}
 		}
 		
 	}
@@ -138,8 +170,9 @@ public class ZeldaDungeon {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			gamePanel.objectManager.player.moveLeft = false;
-			System.out.println("Player left stop");
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.moveLeft = false;
+			}
 		}
 		
 	}
@@ -149,8 +182,9 @@ public class ZeldaDungeon {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			gamePanel.objectManager.player.moveRight = true;
-			System.out.println("Player right start");
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.moveRight = true;
+			}
 		}
 		
 	}
@@ -160,8 +194,9 @@ public class ZeldaDungeon {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			gamePanel.objectManager.player.moveRight = false;
-			System.out.println("Player right stop");
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.moveRight = false;
+			}
 		}
 		
 	}

@@ -7,10 +7,15 @@ public class RoomManager {
 	Dungeon dungeon1;
 	
 	Dungeon loadedDungeon;
-	
 	Room loadedRoom;
+	int currentFloorCordinate;
+	int currentRowCordinate;
+	int currentRoomCordinate;
 	
-	
+	public static final int UP = 0;
+	public static final int DOWN = 0;
+	public static final int LEFT = 0;
+	public static final int RIGHT = 0;
 	
 	
 	
@@ -18,11 +23,33 @@ public class RoomManager {
 		createDungeon();
 		loadedDungeon = dungeon1;
 		loadedRoom = loadedDungeon.startingRoom;
+		currentFloorCordinate = loadedDungeon.startingFloorCordinate;
+		currentRowCordinate = loadedDungeon.startingRowCordinate;
+		currentRoomCordinate = loadedDungeon.startingRoomCordinate;
 	}
+	
+	void switchRoom(int direction) {
+		if(direction == UP) {
+			
+			loadedRoom = loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate][currentRoomCordinate];
+		} else if(direction == DOWN) {
+			
+		} else if(direction == LEFT) {
+			
+		} else if(direction == RIGHT) {
+			
+		}
+	}
+	
 	
 	void draw(Graphics g) {
 		loadedRoom.draw(g);
 	}
+	
+	
+	
+//–––––––––––––––––––––––––––––––––––––––––––––––––Dungeon Creation/Initialization–––––––––––––––––––––––––––––––––––––––––––––//
+	
 	
 	void createDungeon() {
 	//Constant space that initializes the dungeon map. Where the programmer manually inputs the layout of the dungeon and each room.
@@ -44,10 +71,21 @@ public class RoomManager {
 	//Map of each room
 		//Entrance room
 		dungeon1.dungeonMap[1][2][1].roomMap = new roomObject[][] {
-			{new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP)},
-			{new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP)},
-			{new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Floor(1),new Floor(1),new Floor(1),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP)},
-			{new Floor(1),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Trap(Trap.PIT_TRAP),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)}
+		};
+		//Main Room
+		dungeon1.dungeonMap[1][1][1].roomMap = new roomObject[][] {
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
+			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
 			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
 			{new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
 			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
@@ -55,7 +93,11 @@ public class RoomManager {
 		};
 	//Initialize processes
 		//sets starting room
+		dungeon1.startingFloorCordinate = 1;
+		dungeon1.startingRowCordinate = 2;
+		dungeon1.startingRoomCordinate = 1;
 		dungeon1.startingRoom = dungeon1.dungeonMap[1][2][1];
+		
 		
 		//For every room in the dungeon...
 		for (Room[][] floor : dungeon1.dungeonMap) {
@@ -86,6 +128,11 @@ public class RoomManager {
 class Dungeon {
 	Room startingRoom;
 	Room[][][] dungeonMap;
+	
+	int startingFloorCordinate;
+	int startingRowCordinate;
+	int startingRoomCordinate;
+	
 	
 	Dungeon(Room[][][] dungeonMap) {
 		this.dungeonMap = dungeonMap;
