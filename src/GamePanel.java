@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.*;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel implements ActionListener {
 	final int TITLE = 0;
 	final int GAME = 1;
 	final int END = 2;
@@ -109,7 +109,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 //–––––––––––––––––––––––––––––––––––––––Controls/Listeners––––––––––––––––––––––––––––––––––––––––––––//
-	
+	/*
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -138,7 +138,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 			
 			//Player movement
-			else if(e.getKeyCode() == KeyEvent.VK_W) {
+			/*else if(e.getKeyCode() == KeyEvent.VK_W) {
 				objectManager.player.moveUp = true;
 			} else if(e.getKeyCode() == KeyEvent.VK_A) {
 				objectManager.player.moveLeft = true;
@@ -146,7 +146,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				objectManager.player.moveDown = true;
 			} else if(e.getKeyCode() == KeyEvent.VK_D) {
 				objectManager.player.moveRight = true;
-			}
+			}/
 		}
 	}
 
@@ -170,6 +170,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		
 	}
+	*/
 	
 //–––––––––––––––––––––––––––––Testing KeyBindings––––––––––––––––––––––––––//
 
