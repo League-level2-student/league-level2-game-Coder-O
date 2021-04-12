@@ -12,15 +12,17 @@ public class RoomManager {
 	int currentRowCordinate;
 	int currentRoomCordinate;
 	
-	public static final int UP = 0;
-	public static final int DOWN = 0;
-	public static final int LEFT = 0;
-	public static final int RIGHT = 0;
+	public static boolean mapForward = false;
+	public static boolean mapBackward = false;
+	public static boolean mapLeft = false;
+	public static boolean mapRight = false;
+	public static boolean mapUp = false;
+	public static boolean mapDown = false;
 	
 	
 	
 	RoomManager() {
-		createDungeon();
+		createDungeons();
 		loadedDungeon = dungeon1;
 		loadedRoom = loadedDungeon.startingRoom;
 		currentFloorCordinate = loadedDungeon.startingFloorCordinate;
@@ -28,17 +30,87 @@ public class RoomManager {
 		currentRoomCordinate = loadedDungeon.startingRoomCordinate;
 	}
 	
-	void switchRoom(int direction) {
-		if(direction == UP) {
+	void update() {
+	 switchRoom(); 
+	}
+	
+	
+	void switchRoom() {
+		if(mapForward) {
 			
-			loadedRoom = loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate][currentRoomCordinate];
-		} else if(direction == DOWN) {
+			if(currentRowCordinate>0 && loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate-1][currentRoomCordinate]!=null) {
+				currentRowCordinate--;
+			}
+			/////////////
+			//[ ][^][ ]//
+			//[ ][|][ ]//
+			//[ ][ ][ ]//
+			/////////////
 			
-		} else if(direction == LEFT) {
+		} else if(mapBackward) {
 			
-		} else if(direction == RIGHT) {
+			if(currentRowCordinate < loadedDungeon.maxRowCordinate && loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate+1][currentRoomCordinate]!=null) {
+				currentRowCordinate++;
+			}
+			////////////////
+			//[  ][  ][  ]//
+			//[  ][||][  ]//
+			//[  ][\/][  ]//
+			////////////////
 			
+		} else if(mapLeft) {
+
+			if(currentRoomCordinate>0 && loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate][currentRoomCordinate-1]!=null) {
+				currentRoomCordinate--;
+			}
+			/////////////
+			//[ ][ ][ ]//
+			//[<][-][ ]//
+			//[ ][ ][ ]//
+			/////////////
+			
+		} else if(mapRight) {
+
+			if(currentRoomCordinate<loadedDungeon.maxRoomCordinate && loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate][currentRoomCordinate+1]!=null) {
+				currentRoomCordinate++;
+			}
+			/////////////
+			//[ ][ ][ ]//
+			//[ ][-][>]//
+			//[ ][ ][ ]//
+			/////////////
+			
+		} else if(mapUp) {
+
+			if(currentFloorCordinate>0 && loadedDungeon.dungeonMap[currentFloorCordinate-1][currentRowCordinate][currentRoomCordinate]!=null) {
+				currentFloorCordinate--;
+			}
+			/////////////
+			//[ ][ ][ ]//
+			//[ ][|][ ]// Up a floor
+			//[ ][ ][ ]//
+			/////////////
+			
+		} else if(mapDown) {
+
+			if(currentRowCordinate<loadedDungeon.maxFloorCordinate && loadedDungeon.dungeonMap[currentFloorCordinate+1][currentRowCordinate][currentRoomCordinate]!=null) {
+				currentRowCordinate++;
+			}
+			/////////////
+			//[ ][ ][ ]//
+			//[ ][|][ ]// Down a floor
+			//[ ][ ][ ]//
+			/////////////
+				
 		}
+		mapForward = false;
+		mapBackward = false;
+		mapLeft = false;
+		mapRight = false;
+		mapUp = false;
+		mapDown = false;
+		
+		loadedRoom = loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate][currentRoomCordinate];
 	}
 	
 	
@@ -51,9 +123,10 @@ public class RoomManager {
 //–––––––––––––––––––––––––––––––––––––––––––––––––Dungeon Creation/Initialization–––––––––––––––––––––––––––––––––––––––––––––//
 	
 	
-	void createDungeon() {
-	//Constant space that initializes the dungeon map. Where the programmer manually inputs the layout of the dungeon and each room.
+	void createDungeons() {
+	//Constant space that initializes each dungeon's map and variables. Where the programmer manually inputs the layout of the dungeon and each room.
 		
+//––––––––––––––––––––––––––––Dungeon1–––––––––––––––//
 		//Overall map of all rooms
 		dungeon1 = new Dungeon(new Room[/*Floor*/][/*Row*/][/*Column*/] {
 			{ //FLoor 2
@@ -96,8 +169,12 @@ public class RoomManager {
 		dungeon1.startingFloorCordinate = 1;
 		dungeon1.startingRowCordinate = 2;
 		dungeon1.startingRoomCordinate = 1;
-		dungeon1.startingRoom = dungeon1.dungeonMap[1][2][1];
+		dungeon1.startingRoom = dungeon1.dungeonMap[dungeon1.startingFloorCordinate][dungeon1.startingRowCordinate][dungeon1.startingRoomCordinate];
 		
+		//sets max rooms
+		dungeon1.maxFloorCordinate = 1; // 2 floors total
+		dungeon1.maxRowCordinate = 2; // Each with 3 rows
+		dungeon1.maxRoomCordinate = 3; // With 4 rooms each
 		
 		//For every room in the dungeon...
 		for (Room[][] floor : dungeon1.dungeonMap) {
@@ -119,6 +196,9 @@ public class RoomManager {
 				}
 			}
 		}
+		
+	//––––––––––––––––––––––––––––Dungeon 2 would go here–––––––––––––––––––––––––//
+		
 	}
 	
 }
@@ -132,6 +212,10 @@ class Dungeon {
 	int startingFloorCordinate;
 	int startingRowCordinate;
 	int startingRoomCordinate;
+	
+	int maxFloorCordinate;
+	int maxRowCordinate;
+	int maxRoomCordinate;
 	
 	
 	Dungeon(Room[][][] dungeonMap) {

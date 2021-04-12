@@ -11,6 +11,38 @@ public class Player extends Entity {
 	
 	//Update method might need to be overridden
 	
+	
+	@Override
+	void up() {
+		// TODO Auto-generated method stub
+		super.up();
+		if(this.y == 0 && this.moveUp) {
+			RoomManager.mapForward = true;
+			this.y = ZeldaDungeon.HEIGHT - 10;
+		}
+		
+		
+		
+	}
+	
+	@Override
+	void down() {
+		// TODO Auto-generated method stub
+		super.down();
+	}
+	
+	@Override
+	void left() {
+		// TODO Auto-generated method stub
+		super.left();
+	}
+	
+	@Override
+	void right() {
+		// TODO Auto-generated method stub
+		super.right();
+	}
+	
 	@Override
 	void draw(Graphics g) {
 		g.setColor(Color.BLUE);

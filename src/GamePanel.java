@@ -16,8 +16,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	int currentState = TITLE;
 	boolean pause = false;
 	
-	ObjectManager objectManager = new ObjectManager();
-	RoomManager roomManager = new RoomManager();
+	public ObjectManager objectManager = new ObjectManager();
+	public RoomManager roomManager = new RoomManager();
 	
 	Timer frameDraw;
 	
@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	void updateGameState() {
 		objectManager.update();
+		roomManager.update();
 	}
 	
 	void updatePauseSubstate() {
