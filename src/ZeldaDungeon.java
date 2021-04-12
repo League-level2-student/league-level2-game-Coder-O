@@ -41,6 +41,7 @@ public class ZeldaDungeon {
 		gameFrame.setSize(WIDTH, HEIGHT+20);
 		gameFrame.setVisible(true);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//gameFrame.addKeyListener(gamePanel);
 		
 		
 //––––––––––––––––––––––––––––––––––––––––––––Key Bindings–––––––––––––––––––––––––––––––––––––––––––––––––––––––//
@@ -71,7 +72,7 @@ public class ZeldaDungeon {
 		gamePanel.getActionMap().put("playerLeftStop", playerLeftStop_Action);
 		gamePanel.getActionMap().put("playerRightStart", playerRightStart_Action);
 		gamePanel.getActionMap().put("playerRightStop", playerRightStop_Action);
-		
+//*/
 	}
 //Actions
 	public class SwitchState_Action extends AbstractAction {
@@ -199,6 +200,6 @@ public class ZeldaDungeon {
 			}
 		}
 		
-	}
+	} 
 
 }

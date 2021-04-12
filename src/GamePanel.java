@@ -108,18 +108,19 @@ public class GamePanel extends JPanel implements ActionListener {
 		    drawEndState(g);
 		}
 	}
-//–––––––––––––––––––––––––––––––––––––––Controls/Listeners––––––––––––––––––––––––––––––––––––––––––––//
-	/*
+/*//–––––––––––––––––––––––––––––––––––––––Controls/Listeners––––––––––––––––––––––––––––––––––––––––––––//
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Typed-------------------");
 	}
 
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println("Key pressed");
+		System.out.println(e.getKeyChar());
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			//Switches the state in all states
@@ -138,7 +139,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			}
 			
 			//Player movement
-			/*else if(e.getKeyCode() == KeyEvent.VK_W) {
+			else if(e.getKeyCode() == KeyEvent.VK_W) {
 				objectManager.player.moveUp = true;
 			} else if(e.getKeyCode() == KeyEvent.VK_A) {
 				objectManager.player.moveLeft = true;
@@ -146,7 +147,7 @@ public class GamePanel extends JPanel implements ActionListener {
 				objectManager.player.moveDown = true;
 			} else if(e.getKeyCode() == KeyEvent.VK_D) {
 				objectManager.player.moveRight = true;
-			}/
+			}
 		}
 	}
 
@@ -154,6 +155,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("Key released");
+		System.out.println(e.getKeyChar());
 		if (currentState == GAME) {
 			//More controls in GAME state, specifically ending repeated actions/pressed states originating in keyPressed()
 			
@@ -170,9 +172,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		
 	}
-	*/
 	
-//–––––––––––––––––––––––––––––Testing KeyBindings––––––––––––––––––––––––––//
+	
+//–––––––––––––––––––––––––––––Testing KeyBindings––––––––––––––––––––––––––//*/
 
 	
 	
