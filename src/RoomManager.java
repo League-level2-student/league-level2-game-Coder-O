@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class RoomManager {
 //Manages rooms, sets them up.
@@ -141,28 +142,34 @@ public class RoomManager {
 			},
 		});
 		
-	//Map of each room
+	//Map of each room //Each room is a 9x9 grid surrounded on all 4 sides by walls/ other barriers, making an 11 x 11 grid
 		//Entrance room
 		dungeon1.dungeonMap[1][2][1].roomMap = new roomObject[][] {
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)}
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(2),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)}
 		};
 		//Main Room
 		dungeon1.dungeonMap[1][1][1].roomMap = new roomObject[][] {
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)},
-			{new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1)}
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(2),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)}
 		};
 	//Initialize processes
 		//sets starting room
@@ -186,8 +193,13 @@ public class RoomManager {
 						for (roomObject[] roomRow : room.roomMap) {
 							int x = 0;
 							for (roomObject object : roomRow) {
-								object.cornerY = y*100;
-								object.cornerX = x*100;
+								object.cornerY = y*Room.roomObjectSize;
+								object.cornerX = x*Room.roomObjectSize;
+								object.setCollsionBox();
+								room.roomCollisonBoxes.add(object.collisionBox);
+								if(object.objectType==roomObject.WALL) {
+									Entity.entityNotIntersectable.add(object.collisionBox);
+								}
 								x++;
 							}
 							y++;
@@ -225,8 +237,12 @@ class Dungeon {
 }
 
 class Room {
-	//Each room is a 8 by 8 grid off 100 pxl by 100 pxl squares. Each square can hold one object, such as a wall, a floor, a pit, etc.
+	//Each room is a 11 by 11 grid off 80 pxl by 80 pxl squares. Each square can hold one object, such as a wall, a floor, a pit, etc.
 	roomObject[][] roomMap;
+	
+	ArrayList<Rectangle> roomCollisonBoxes;
+	public static final int roomSize = 11; // MUST be factor of ZeldaDungeon.Height
+	public static final int roomObjectSize = ZeldaDungeon.HEIGHT/roomSize;
 
 	public void draw(Graphics g) {
 		// TODO Auto-generated method stub
@@ -246,13 +262,27 @@ class Room {
 
 class roomObject {
 	//Base class of each item in a room's grid
-	int type;
+	static final int WALL = 0;
+	static final int TRAP = 1;
+	static final int FLOOR = 2;
+	
+	
+	int objectType;
+	int subType;
 	int cornerX;
 	int cornerY;
 	Rectangle collisionBox;
 	
-	roomObject(int type) {
-		this.type = type;
+	roomObject(int objectType, int subType) {
+		this.objectType = objectType;
+		this.subType = subType;
+	}
+	
+	void setCollsionBox() {
+		this.collisionBox.x = cornerX;
+		this.collisionBox.y = cornerY;
+		this.collisionBox.height = Room.roomObjectSize;
+		this.collisionBox.width = Room.roomObjectSize;
 	}
 	
 	void draw(Graphics g) {
@@ -266,20 +296,23 @@ class Wall extends roomObject {
 	public static final int NORMAL = 1;
 	public static final int DOOR = 2;
 	public static final int TORCH = 3;
+	public static final int STAIR = 4;
 	
 	Wall(int type) {
-		super(type);
+		super(type, WALL);
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
 	void draw(Graphics g) {
-		if(type == NORMAL) {
+		if(subType == NORMAL) {
 			g.setColor(Color.DARK_GRAY);
+		} else if(subType == DOOR) {
+			g.setColor(new Color(200,200,0));
 		} else {
 			g.setColor(Color.GRAY);
 		}
-		g.fillRect(cornerX, cornerY, 100, 100);
+		g.fillRect(cornerX, cornerY, Room.roomObjectSize, Room.roomObjectSize);
 	}
 
 	
@@ -289,18 +322,18 @@ class Trap extends roomObject {
 	public static final int PIT_TRAP = 1;
 	
 	Trap(int type) {
-		super(type);
+		super(type, TRAP);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	void draw(Graphics g) {
-		if(type == PIT_TRAP) {
+		if(subType == PIT_TRAP) {
 			g.setColor(Color.BLACK);
 		} else {
 			g.setColor(Color.GRAY);
 		}
-		g.fillRect(cornerX, cornerY, 100, 100);
+		g.fillRect(cornerX, cornerY, Room.roomObjectSize, Room.roomObjectSize);
 	}
 	
 }
@@ -308,24 +341,24 @@ class Floor extends roomObject {
 	public static final int NORMAL = 1;
 	Object spawningObject;
 	Floor(int type) {
-		super(type);
+		super(type, FLOOR);
 		// TODO Auto-generated constructor stub
 	}
 	//If the floor spawns with an object on it (like an enemy), it will use this constructor
 	Floor(int type, Object spawningObject) {
-		super(type);
+		super(type, FLOOR);
 		this.spawningObject = spawningObject;
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
 	void draw(Graphics g) {
-		if(type == NORMAL) {
+		if(subType == NORMAL) {
 			g.setColor(Color.GREEN);
 		} else {
 			g.setColor(Color.GRAY);
 		}
-		g.fillRect(cornerX, cornerY, 100, 100);
+		g.fillRect(cornerX, cornerY, Room.roomObjectSize, Room.roomObjectSize);
 	}
 	
 }

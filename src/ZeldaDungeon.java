@@ -10,8 +10,8 @@ public class ZeldaDungeon {
 	JFrame gameFrame;
 	GamePanel gamePanel;
 	
-	public static final int WIDTH = 800;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 880;
+	public static final int HEIGHT = 880;
 	
 	Action switchState_Action = new SwitchState_Action();
 	Action pause_Action = new Pause_Action();

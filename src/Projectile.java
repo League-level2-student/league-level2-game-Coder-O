@@ -1,7 +1,8 @@
 import java.awt.Graphics;
 
 public class Projectile extends Entity {
-
+	
+	
 	Projectile(int x, int y, int width, int height, int speed) {
 		super(x, y, width, height, speed);
 		// TODO Auto-generated constructor stub

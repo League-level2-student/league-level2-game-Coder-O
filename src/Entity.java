@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Area;
+import java.util.ArrayList;
 
 public class Entity {
 	int x;
@@ -15,6 +16,7 @@ public class Entity {
 	boolean moveLeft = false;
 	boolean moveRight = false;
 	Rectangle collisionBox;
+	public static ArrayList<Rectangle> entityNotIntersectable;
 	
 	Entity(int x, int y, int width, int height, int speed) {
 		this.x = x;
