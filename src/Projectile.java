@@ -4,7 +4,7 @@ public class Projectile extends Entity {
 	
 	
 	Projectile(int x, int y, int width, int height, int speed) {
-		super(x, y, width, height, speed);
+		super(x, y, width, height, speed,0,null);
 		// TODO Auto-generated constructor stub
 	}
 	

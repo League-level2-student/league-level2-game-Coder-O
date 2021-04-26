@@ -4,11 +4,11 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class Player extends Entity {
-	public static ArrayList<Rectangle> playerNotInterseptical;
+	public static final int[] playerIntersects_Room = {roomObject.WALL, };
 	
 	Player(int x, int y) {
-		super(x, y, 50, 50, 5);  //Assuming player will always start out at the same size
-		playerNotInterseptical.addAll(entityNotIntersectable);
+		super(x, y, 50, 50, 5, PLAYER, playerIntersects_Room);  //Assuming player will always start out at the same size
+		
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -17,6 +17,12 @@ public class Player extends Entity {
 	void update() {
 		// TODO Auto-generated method stub
 		super.update();
+		
+	}
+	
+	@Override
+	void intersectActions_Room(roomObject roomObject) {
+		// TODO Auto-generated method stub
 		
 	}
 	

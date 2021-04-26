@@ -4,7 +4,7 @@ import java.awt.Graphics;
 public class Staff extends Entity {
 	Player player;
 	Staff(Player player) {
-		super(player.x+(player.width/2)-37, player.y+(player.height/2), 75, 5, 0);
+		super(player.x+(player.width/2)-37, player.y+(player.height/2), 75, 5, 0,0,null);
 		this.player = player;
 		// TODO Auto-generated constructor stub
 	}

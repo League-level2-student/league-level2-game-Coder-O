@@ -7,8 +7,8 @@ public class RoomManager {
 //Manages rooms, sets them up.
 	Dungeon dungeon1;
 	
-	Dungeon loadedDungeon;
-	Room loadedRoom;
+	public static Dungeon loadedDungeon;
+	public static Room loadedRoom;
 	int currentFloorCordinate;
 	int currentRowCordinate;
 	int currentRoomCordinate;
@@ -190,16 +190,15 @@ public class RoomManager {
 					//Initialize each of it's object's coordinates.
 					if(room!= null&&room.roomMap!=null) {                //<––––––––––Delete room.roomMap!=null after all rooms have been formed!!!!!! It is unnecessary.
 						int y = 0;
+						System.out.println(y);
 						for (roomObject[] roomRow : room.roomMap) {
 							int x = 0;
+							System.out.println(x);
 							for (roomObject object : roomRow) {
 								object.cornerY = y*Room.roomObjectSize;
 								object.cornerX = x*Room.roomObjectSize;
 								object.setCollsionBox();
 								room.roomCollisonBoxes.add(object.collisionBox);
-								if(object.objectType==roomObject.WALL) {
-									Entity.entityNotIntersectable.add(object.collisionBox);
-								}
 								x++;
 							}
 							y++;
@@ -240,7 +239,7 @@ class Room {
 	//Each room is a 11 by 11 grid off 80 pxl by 80 pxl squares. Each square can hold one object, such as a wall, a floor, a pit, etc.
 	roomObject[][] roomMap;
 	
-	ArrayList<Rectangle> roomCollisonBoxes;
+	ArrayList<Rectangle> roomCollisonBoxes = new ArrayList<Rectangle>();
 	public static final int roomSize = 11; // MUST be factor of ZeldaDungeon.Height
 	public static final int roomObjectSize = ZeldaDungeon.HEIGHT/roomSize;
 
@@ -271,7 +270,7 @@ class roomObject {
 	int subType;
 	int cornerX;
 	int cornerY;
-	Rectangle collisionBox;
+	Rectangle collisionBox = new Rectangle();
 	
 	roomObject(int objectType, int subType) {
 		this.objectType = objectType;
@@ -279,6 +278,7 @@ class roomObject {
 	}
 	
 	void setCollsionBox() {
+		System.out.println(cornerX);
 		this.collisionBox.x = cornerX;
 		this.collisionBox.y = cornerY;
 		this.collisionBox.height = Room.roomObjectSize;
