@@ -108,6 +108,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		}else if(currentState == END){
 		    drawEndState(g);
 		}
+		
+		g.setColor(Color.WHITE);
+		g.drawString(ZeldaDungeon.lastKeyPressed + " " + ZeldaDungeon.lastKeyReleased, 50, 50);
 	}
 /*//–––––––––––––––––––––––––––––––––––––––Controls/Listeners––––––––––––––––––––––––––––––––––––––––––––//
 	
@@ -184,6 +187,11 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		// Called 60 times per second by timers (Specifically, frameDraw)
+		
+		/*System.out.println("Up: " + objectManager.player.moveUp);
+		System.out.println("Down: " + objectManager.player.moveDown);
+		System.out.println("Left: " + objectManager.player.moveLeft);
+		System.out.println("Right: " + objectManager.player.moveRight);*/
 		if(!pause) {
 			if(currentState == TITLE){
 			    updateTitleState();

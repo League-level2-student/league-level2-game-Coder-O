@@ -190,10 +190,10 @@ public class RoomManager {
 					//Initialize each of it's object's coordinates.
 					if(room!= null&&room.roomMap!=null) {                //<––––––––––Delete room.roomMap!=null after all rooms have been formed!!!!!! It is unnecessary.
 						int y = 0;
-						System.out.println(y);
+						
 						for (roomObject[] roomRow : room.roomMap) {
 							int x = 0;
-							System.out.println(x);
+							
 							for (roomObject object : roomRow) {
 								object.cornerY = y*Room.roomObjectSize;
 								object.cornerX = x*Room.roomObjectSize;
@@ -278,7 +278,6 @@ class roomObject {
 	}
 	
 	void setCollsionBox() {
-		System.out.println(cornerX);
 		this.collisionBox.x = cornerX;
 		this.collisionBox.y = cornerY;
 		this.collisionBox.height = Room.roomObjectSize;
@@ -299,7 +298,7 @@ class Wall extends roomObject {
 	public static final int STAIR = 4;
 	
 	Wall(int type) {
-		super(type, WALL);
+		super(WALL, type);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -322,7 +321,7 @@ class Trap extends roomObject {
 	public static final int PIT_TRAP = 1;
 	
 	Trap(int type) {
-		super(type, TRAP);
+		super(TRAP, type);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -341,12 +340,12 @@ class Floor extends roomObject {
 	public static final int NORMAL = 1;
 	Object spawningObject;
 	Floor(int type) {
-		super(type, FLOOR);
+		super(FLOOR, type);
 		// TODO Auto-generated constructor stub
 	}
 	//If the floor spawns with an object on it (like an enemy), it will use this constructor
 	Floor(int type, Object spawningObject) {
-		super(type, FLOOR);
+		super(FLOOR, type);
 		this.spawningObject = spawningObject;
 		// TODO Auto-generated constructor stub
 	}

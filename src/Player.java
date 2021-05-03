@@ -23,7 +23,20 @@ public class Player extends Entity {
 	@Override
 	void intersectActions_Room(roomObject roomObject) {
 		// TODO Auto-generated method stub
-		
+		if (roomObject.objectType == roomObject.WALL && roomObject.subType != Wall.DOOR && roomObject.subType != Wall.STAIR) {
+			if (this.moveUp) {
+				y+=speed;
+			} 
+			if (this.moveDown) {
+				y-=speed;
+			}
+			if (this.moveLeft) {
+				x+=speed;
+			} 
+			if (this.moveRight) {
+				x-=speed;
+			}
+		}
 	}
 	
 	@Override
@@ -43,7 +56,7 @@ public class Player extends Entity {
 	void down() {
 		// TODO Auto-generated method stub
 		super.down();
-		if(this.y == 750 && this.moveDown) {
+		if(this.y == ZeldaDungeon.HEIGHT - height && this.moveDown) {
 			RoomManager.mapBackward = true;
 			this.y = 60;
 		}

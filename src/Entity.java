@@ -4,16 +4,23 @@ import java.awt.Shape;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 
-public class Entity {
+public abstract class Entity {
 	int x;
 	int y;
 	int width;
 	int height;
 	int speed = 0;
 	int type;
+	int direction;
 	
 	public static final int PLAYER = 0;
 	public static final int ENEMY = 1;
+	
+	public static final int UP = 0;
+	public static final int DOWN = 1;
+	public static final int LEFT = 2;
+	public static final int RIGHT = 3;
+	
 	
 	boolean isActive = true;
 	boolean moveUp = false;
@@ -64,22 +71,10 @@ public class Entity {
 	}
 	
 	//Called when the entity intersects with a room object. Determines what to do. Meant to be overridden.
-	void intersectActions_Room(roomObject roomObject) {
-		if (roomObject.objectType == roomObject.WALL) {
-			if (this.moveUp) {
-				y+=speed;
-			} 
-			if (this.moveDown) {
-				y-=speed;
-			}
-			if (this.moveLeft) {
-				x+=speed;
-			} 
-			if (this.moveRight) {
-				x-=speed;
-			}
-		}
-	}
+	abstract void intersectActions_Room(roomObject roomObject);
+		
+		
+	
 	
 	public static boolean testIntersection(Shape shapeA, Shape shapeB) {
 		Area areaA = new Area(shapeA);

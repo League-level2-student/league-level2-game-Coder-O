@@ -3,8 +3,9 @@ import java.awt.Graphics;
 public class Projectile extends Entity {
 	
 	
-	Projectile(int x, int y, int width, int height, int speed) {
-		super(x, y, width, height, speed,0,null);
+	
+	Projectile(int x, int y, int width, int height, int speed, int[] roomObjectIntersects) {
+		super(x, y, width, height, speed,0, roomObjectIntersects);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -18,6 +19,12 @@ public class Projectile extends Entity {
 	void update() {
 		// TODO Auto-generated method stub
 		super.update();
+	}
+
+	@Override
+	void intersectActions_Room(roomObject roomObject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

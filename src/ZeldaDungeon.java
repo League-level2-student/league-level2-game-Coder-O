@@ -10,6 +10,9 @@ public class ZeldaDungeon {
 	JFrame gameFrame;
 	GamePanel gamePanel;
 	
+	static String lastKeyPressed = "none";
+	static String lastKeyReleased = "none";
+	
 	public static final int WIDTH = 880;
 	public static final int HEIGHT = 880;
 	
@@ -88,7 +91,7 @@ public class ZeldaDungeon {
 				}
 				gamePanel.currentState++;
 			}
-			
+			lastKeyPressed = "Enter";
 		}
 		
 	}
@@ -98,9 +101,11 @@ public class ZeldaDungeon {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.pause = !gamePanel.pause;
 			}
+			lastKeyPressed = "E";
 		}
 		
 	}
@@ -113,6 +118,7 @@ public class ZeldaDungeon {
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.objectManager.player.moveUp = true;
 			}
+			lastKeyPressed = "W";
 			
 		}
 		
@@ -126,6 +132,7 @@ public class ZeldaDungeon {
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.objectManager.player.moveUp = false;
 			}
+			lastKeyReleased = "W";
 		}
 		
 	}
@@ -138,6 +145,7 @@ public class ZeldaDungeon {
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.objectManager.player.moveDown = true;
 			}
+			lastKeyPressed = "S";
 		}
 		
 	}
@@ -150,6 +158,7 @@ public class ZeldaDungeon {
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.objectManager.player.moveDown = false;
 			}
+			lastKeyReleased = "S";
 		}
 		
 	}
@@ -162,6 +171,7 @@ public class ZeldaDungeon {
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.objectManager.player.moveLeft = true;
 			}
+			lastKeyPressed = "A";
 		}
 		
 	}
@@ -174,6 +184,7 @@ public class ZeldaDungeon {
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.objectManager.player.moveLeft = false;
 			}
+			lastKeyReleased = "A";
 		}
 		
 	}
@@ -186,6 +197,7 @@ public class ZeldaDungeon {
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.objectManager.player.moveRight = true;
 			}
+			lastKeyPressed = "D";
 		}
 		
 	}
@@ -198,8 +210,9 @@ public class ZeldaDungeon {
 			if(gamePanel.currentState == gamePanel.GAME) {
 				gamePanel.objectManager.player.moveRight = false;
 			}
+			lastKeyReleased = "D";
 		}
-		
+
 	} 
 
 }

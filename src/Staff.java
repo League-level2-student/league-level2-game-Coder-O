@@ -22,5 +22,10 @@ public class Staff extends Entity {
 		// TODO Auto-generated method stub
 		super.draw(g);
 	}
+	@Override
+	void intersectActions_Room(roomObject roomObject) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
