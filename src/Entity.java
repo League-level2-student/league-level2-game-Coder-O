@@ -31,12 +31,13 @@ public abstract class Entity {
 	
 	int[] roomIntersects;
 	
-	Entity(int x, int y, int width, int height, int speed, int type, int[] roomIntersects) {
+	Entity(int x, int y, int width, int height, int speed, int type, int direction, int[] roomIntersects) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.speed = speed;
+		this.direction = direction;
 		this.type = type;
 		this.roomIntersects = roomIntersects;
 		collisionBox = new Rectangle(x, y, width, height);
@@ -89,25 +90,29 @@ public abstract class Entity {
 	void up() {
 		
 		if (moveUp&&y>0) {  //possibly need to say this.moveUp(), same for rest of movement methods. <- Research suggests this is unlikely.
+			direction = UP;
 			y-=speed;
 		}
 		//collisionBox.y=y;
 	}
 	void down() {
 		if (moveDown&&y<=ZeldaDungeon.HEIGHT-height-speed) {
-	    	y+=speed;
+			direction = DOWN;
+			y+=speed;
 	    }
 		//collisionBox.y=y;
 	}
 	void left() {
 		if (moveLeft&&x>0) {
-	    	x-=speed;
+			direction = LEFT;
+			x-=speed;
 	    }
 		//collisionBox.x=x;
 	}
 	void right() {
 		if (moveRight&&x<=ZeldaDungeon.WIDTH-width-speed) {
-	    	x+=speed;
+			direction = RIGHT;
+			x+=speed;
 	    }
 		//collisionBox.x=x;
 	}

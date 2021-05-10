@@ -1,23 +1,37 @@
 import java.awt.Graphics;
 
-public class Projectile extends Entity {
+public abstract class Projectile extends Entity {
+	
+	int indexInArray;
 	
 	
-	
-	Projectile(int x, int y, int width, int height, int speed, int[] roomObjectIntersects) {
-		super(x, y, width, height, speed,0, roomObjectIntersects);
+	Projectile(int x, int y, int width, int height, int speed, int direction, int indexInArray, int[] roomObjectIntersects) {
+		super(x, y, width, height, speed,0, direction, roomObjectIntersects);
+		this.indexInArray = indexInArray;
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		super.draw(g);
-	}
+	
 	
 	@Override
 	void update() {
 		// TODO Auto-generated method stub
+		moveUp = false;
+		moveDown = false;
+		moveLeft = false;
+		moveRight = false;
+		if (direction == UP) {
+			moveUp = true;
+		}
+		if (direction == DOWN) {
+			moveDown = true;
+		}
+		if (direction == LEFT) {
+			moveLeft = true;
+		}
+		if (direction == RIGHT) {
+			moveRight = true;
+		}
 		super.update();
 	}
 
@@ -26,5 +40,6 @@ public class Projectile extends Entity {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

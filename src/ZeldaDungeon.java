@@ -28,6 +28,8 @@ public class ZeldaDungeon {
 	Action playerRightStart_Action = new PlayerRightStart_Action();
 	Action playerRightStop_Action = new PlayerRightStop_Action();
 	
+	Action throwFireball_Action = new ThrowFireball_Action();
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ZeldaDungeon zeldaDungeon = new ZeldaDungeon();
@@ -61,6 +63,7 @@ public class ZeldaDungeon {
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0, true), "playerLeftStop");
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, false), "playerRightStart");
 		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, true), "playerRightStop");
+		gamePanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "throwFireballStart");
 		
 //Action map
 		gamePanel.getActionMap().put("switchState", switchState_Action);
@@ -75,6 +78,7 @@ public class ZeldaDungeon {
 		gamePanel.getActionMap().put("playerLeftStop", playerLeftStop_Action);
 		gamePanel.getActionMap().put("playerRightStart", playerRightStart_Action);
 		gamePanel.getActionMap().put("playerRightStop", playerRightStop_Action);
+		gamePanel.getActionMap().put("throwFireballStart", throwFireball_Action);
 //*/
 	}
 //Actions
@@ -214,5 +218,18 @@ public class ZeldaDungeon {
 		}
 
 	} 
+	
+	public class ThrowFireball_Action extends AbstractAction {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			if(gamePanel.currentState == gamePanel.GAME) {
+				gamePanel.objectManager.player.fireBall();
+			}
+			lastKeyReleased = "Space";
+		}
+		
+	}
 
 }

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 
 public class Player extends Entity {
 	public static final int[] playerIntersects_Room = {roomObject.WALL, };
+	static boolean fireballInPlay = false;
+	
 	
 	Player(int x, int y) {
-		super(x, y, 50, 50, 5, PLAYER, playerIntersects_Room);  //Assuming player will always start out at the same size
+		super(x, y, 50, 50, 5, PLAYER, Entity.UP, playerIntersects_Room);  //Assuming player will always start out at the same size
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -72,6 +74,12 @@ public class Player extends Entity {
 	void right() {
 		// TODO Auto-generated method stub
 		super.right();
+	}
+	
+	void fireBall() {
+		if(!fireballInPlay) {
+			ObjectManager.playerProjectiles.add(new FireBall(x,y,ObjectManager.playerProjectiles.size()+1,direction));
+		}
 	}
 	
 	@Override
