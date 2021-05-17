@@ -33,6 +33,7 @@ public class RoomManager {
 	
 	void update() {
 	 switchRoom(); 
+	 roomSpecificActions();
 	}
 	
 	
@@ -114,6 +115,17 @@ public class RoomManager {
 		loadedRoom = loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate][currentRoomCordinate];
 	}
 	
+	void roomSpecificActions() { //Hard-coded area for each room's unique actions, such as "this torch opens a door."
+		if(loadedDungeon==dungeon1) {
+			if(loadedRoom==loadedDungeon.dungeonMap[1][2][1]) {
+				//Entrance room.
+				if(loadedRoom.roomMap[4][3].subType_SpecificState==Wall.ON_OR_OPEN&&loadedRoom.roomMap[4][7].subType_SpecificState==Wall.ON_OR_OPEN) {
+					loadedRoom.roomMap[0][5].subType_SpecificState = Wall.ON_OR_OPEN;
+				}
+			}
+		}
+	}
+	
 	
 	void draw(Graphics g) {
 		loadedRoom.draw(g);
@@ -149,7 +161,7 @@ public class RoomManager {
 			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new  Wall(1)},
 			{new  Wall(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new Floor(1),new Floor(2),new  Wall(1)},
 			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new  Wall(3),new Floor(1),new Floor(1),new Floor(1),new  Wall(3),new Floor(1),new Floor(1),new  Wall(1)},
 			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
 			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
 			{new  Wall(1),new Floor(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
@@ -159,17 +171,17 @@ public class RoomManager {
 		};
 		//Main Room
 		dungeon1.dungeonMap[1][1][1].roomMap = new roomObject[][] {
-			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(2),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)}
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(2,1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)}
 		};
 	//Initialize processes
 		//sets starting room
@@ -264,7 +276,7 @@ class roomObject {
 	static final int WALL = 0;
 	static final int TRAP = 1;
 	static final int FLOOR = 2;
-	
+	int subType_SpecificState = 0; //Such as Open for a door or Lit for a torch.
 	
 	int objectType;
 	int subType;
@@ -297,9 +309,16 @@ class Wall extends roomObject {
 	public static final int TORCH = 3;
 	public static final int STAIR = 4;
 	
+	
+	public static final int ON_OR_OPEN = 1;
+	
 	Wall(int type) {
 		super(WALL, type);
 		// TODO Auto-generated constructor stub
+	}
+	Wall(int type, int subType_SpecificState) {
+		super(WALL, type);
+		this.subType_SpecificState = subType_SpecificState;
 	}
 	
 	@Override
@@ -307,11 +326,26 @@ class Wall extends roomObject {
 		if(subType == NORMAL) {
 			g.setColor(Color.DARK_GRAY);
 		} else if(subType == DOOR) {
-			g.setColor(new Color(200,200,0));
+			if(subType_SpecificState==ON_OR_OPEN) {
+				g.setColor(new Color(200,200,0));
+			} else {
+				g.setColor(new Color(100,100,0));
+			}
 		} else {
 			g.setColor(Color.GRAY);
 		}
+		
 		g.fillRect(cornerX, cornerY, Room.roomObjectSize, Room.roomObjectSize);
+		
+		if(subType == TORCH) {
+			if(subType_SpecificState==ON_OR_OPEN) {
+				g.setColor(Color.RED);
+			} else {
+				g.setColor(Color.DARK_GRAY);
+			}
+			
+			g.fillRect(cornerX+Room.roomObjectSize/4, cornerY+Room.roomObjectSize/4, 2*Room.roomObjectSize/4, 2*Room.roomObjectSize/4);
+		}
 	}
 
 	
@@ -355,7 +389,7 @@ class Floor extends roomObject {
 		if(subType == NORMAL) {
 			g.setColor(Color.GREEN);
 		} else {
-			g.setColor(Color.GRAY);
+			g.setColor(Color.CYAN);
 		}
 		g.fillRect(cornerX, cornerY, Room.roomObjectSize, Room.roomObjectSize);
 	}

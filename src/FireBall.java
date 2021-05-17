@@ -8,7 +8,7 @@ public class FireBall extends Projectile {
 	
 	
 	FireBall(int x, int y, int direction, int indexInArray) {
-		super(x, y, 5, 5, 15, direction, indexInArray,fireBallIntersects_Room);
+		super(x, y, 15, 15, 15, direction, indexInArray,fireBallIntersects_Room);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -29,11 +29,14 @@ public class FireBall extends Projectile {
 		// TODO Auto-generated method stub
 		if (roomObject.objectType == roomObject.WALL) {
 			explode();
+			if(roomObject.subType==Wall.TORCH && roomObject.subType_SpecificState != Wall.ON_OR_OPEN) {
+				roomObject.subType_SpecificState = Wall.ON_OR_OPEN;
+			}
 		}
 	}
 	
 	void explode() {
-		System.out.println(x+" "+y+" "+direction);
 		isActive=false;
+		Player.fireballInPlay = false;
 	}
 }

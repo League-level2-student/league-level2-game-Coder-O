@@ -25,7 +25,8 @@ public class Player extends Entity {
 	@Override
 	void intersectActions_Room(roomObject roomObject) {
 		// TODO Auto-generated method stub
-		if (roomObject.objectType == roomObject.WALL && roomObject.subType != Wall.DOOR && roomObject.subType != Wall.STAIR) {
+		if (roomObject.objectType == roomObject.WALL && !((roomObject.subType == Wall.DOOR && roomObject.subType_SpecificState==Wall.ON_OR_OPEN) || roomObject.subType == Wall.STAIR)) {
+	//  If (It is a wall and is not ((a door that is open) or a stair)
 			if (this.moveUp) {
 				y+=speed;
 			} 
@@ -78,7 +79,8 @@ public class Player extends Entity {
 	
 	void fireBall() {
 		if(!fireballInPlay) {
-			ObjectManager.playerProjectiles.add(new FireBall(x,y,ObjectManager.playerProjectiles.size()+1,direction));
+			ObjectManager.playerProjectiles.add(new FireBall(x,y,direction,ObjectManager.playerProjectiles.size()));
+			fireballInPlay=true;
 		}
 	}
 	
