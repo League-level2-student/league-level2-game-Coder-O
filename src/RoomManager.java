@@ -171,17 +171,31 @@ public class RoomManager {
 		};
 		//Main Room
 		dungeon1.dungeonMap[1][1][1].roomMap = new roomObject[][] {
-			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
-			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(2,1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)}
+			{new    Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)},
+			{new    Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new    Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new    Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new    Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new  Wall(2,1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new    Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new    Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new    Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new    Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
+			{new    Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(2,1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)}
+		};
+		
+		dungeon1.dungeonMap[1][1][0].roomMap = new roomObject[][] {
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Trap(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(2,1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1)}
 		};
 	//Initialize processes
 		//sets starting room

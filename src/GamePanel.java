@@ -39,6 +39,11 @@ public class GamePanel extends JPanel implements ActionListener {
 	void updateGameState() {
 		objectManager.update();
 		roomManager.update();
+		if(Player.health>Player.MAX_HEALTH) {
+			Player.health = Player.MAX_HEALTH;
+		} else if (Player.health <= 0) {
+			gameOver();
+		}
 	}
 	
 	void updatePauseSubstate() {
@@ -46,6 +51,25 @@ public class GamePanel extends JPanel implements ActionListener {
 	}
 	
 	void updateEndState() {
+		
+	}
+	
+	void gameOver() {
+		currentState = END;
+		objectManager = new ObjectManager();
+		
+		roomManager.mapBackward = false;
+		roomManager.mapForward = false;
+		roomManager.mapLeft = false;
+		roomManager.mapRight = false;
+		roomManager.mapUp = false;
+		roomManager.mapDown = false;
+		
+		roomManager.currentFloorCordinate = roomManager.loadedDungeon.startingFloorCordinate;
+		roomManager.currentRowCordinate = roomManager.loadedDungeon.startingRowCordinate;
+		roomManager.currentRoomCordinate = roomManager.loadedDungeon.startingRoomCordinate;
+		
+		roomManager.loadedRoom = roomManager.loadedDungeon.dungeonMap[roomManager.currentFloorCordinate][roomManager.currentRowCordinate][roomManager.currentRoomCordinate];
 		
 	}
 	
@@ -72,6 +96,12 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 		roomManager.draw(g);
 		objectManager.draw(g);
+		
+		g.setColor(Color.RED);
+		for (int i = 0; i < Player.health; i++) {
+			g.fillRect((ZeldaDungeon.WIDTH-150) + (45*i), 25, 30, 30);
+		}
+		
 	}
 	void drawPauseSubstate(Graphics g) {
 		g.setColor(new Color(100,100,100,100));
