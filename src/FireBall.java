@@ -4,6 +4,7 @@ import java.awt.Graphics;
 public class FireBall extends Projectile {
 	
 	public static final int[] fireBallIntersects_Room = {roomObject.WALL, };
+	public static final int[] fireBallIntersects_Entity = {ENEMY, };
 	
 	
 	

@@ -15,6 +15,7 @@ public abstract class Entity {
 	
 	public static final int PLAYER = 0;
 	public static final int ENEMY = 1;
+	public static final int PROJECTILE = 2;
 	
 	public static final int UP = 0;
 	public static final int DOWN = 1;

@@ -6,7 +6,7 @@ public abstract class Projectile extends Entity {
 	
 	
 	Projectile(int x, int y, int width, int height, int speed, int direction, int indexInArray, int[] roomObjectIntersects) {
-		super(x, y, width, height, speed,0, direction, roomObjectIntersects);
+		super(x, y, width, height, speed, PROJECTILE, direction, roomObjectIntersects);
 		this.indexInArray = indexInArray;
 		// TODO Auto-generated constructor stub
 	}

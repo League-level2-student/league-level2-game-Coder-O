@@ -20,7 +20,7 @@ public class RoomManager {
 	public static boolean mapUp = false;
 	public static boolean mapDown = false;
 	
-	
+	public static boolean initializedRoom = false;
 	
 	RoomManager() {
 		createDungeons();
@@ -32,8 +32,11 @@ public class RoomManager {
 	}
 	
 	void update() {
-	 switchRoom(); 
-	 roomSpecificActions();
+		switchRoom(); 
+		roomSpecificActions();
+		if(!initializedRoom) {
+			 initRoom();
+		}
 	}
 	
 	
@@ -49,6 +52,8 @@ public class RoomManager {
 			//[ ][ ][ ]//
 			/////////////
 			
+			initializedRoom = false;
+			
 		} else if(mapBackward) {
 			
 			if(currentRowCordinate < loadedDungeon.maxRowCordinate && loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate+1][currentRoomCordinate]!=null) {
@@ -59,6 +64,8 @@ public class RoomManager {
 			//[  ][||][  ]//
 			//[  ][\/][  ]//
 			////////////////
+			
+			initializedRoom = false;
 			
 		} else if(mapLeft) {
 
@@ -71,6 +78,8 @@ public class RoomManager {
 			//[ ][ ][ ]//
 			/////////////
 			
+			initializedRoom = false;
+			
 		} else if(mapRight) {
 
 			if(currentRoomCordinate<loadedDungeon.maxRoomCordinate && loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate][currentRoomCordinate+1]!=null) {
@@ -81,6 +90,8 @@ public class RoomManager {
 			//[ ][-][>]//
 			//[ ][ ][ ]//
 			/////////////
+			
+			initializedRoom = false;
 			
 		} else if(mapUp) {
 
@@ -93,6 +104,8 @@ public class RoomManager {
 			//[ ][ ][ ]//
 			/////////////
 			
+			initializedRoom = false;
+			
 		} else if(mapDown) {
 
 			if(currentRowCordinate<loadedDungeon.maxFloorCordinate && loadedDungeon.dungeonMap[currentFloorCordinate+1][currentRowCordinate][currentRoomCordinate]!=null) {
@@ -103,7 +116,9 @@ public class RoomManager {
 			//[ ][|][ ]// Down a floor
 			//[ ][ ][ ]//
 			/////////////
-				
+			
+			initializedRoom = false;
+			
 		}
 		mapForward = false;
 		mapBackward = false;
@@ -113,6 +128,28 @@ public class RoomManager {
 		mapDown = false;
 		
 		loadedRoom = loadedDungeon.dungeonMap[currentFloorCordinate][currentRowCordinate][currentRoomCordinate];
+		
+		
+	}
+	
+	void initRoom() {
+		//Initializes things like enemies, which reset every time the room switches.
+		initializedRoom = true;
+		ObjectManager.enemiesInRoom.clear();
+		for(roomObject[] row : loadedRoom.roomMap) {
+			for(roomObject object : row) {
+				if(object.spawnObjectType != 0) {
+					if(object.spawnObjectType == Enemy.EYERIS) {
+						ObjectManager.enemiesInRoom.add(new Eyeris(object.cornerX, object.cornerY, ObjectManager.enemiesInRoom.size()));
+					}
+					//Other enemies will go here.
+					
+					//Items will come after.
+				}
+			}
+		}
+		
+		
 	}
 	
 	void roomSpecificActions() { //Hard-coded area for each room's unique actions, such as "this torch opens a door."
@@ -183,19 +220,19 @@ public class RoomManager {
 			{new    Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(1)},
 			{new    Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(2,1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1)}
 		};
-		
+		//Left room
 		dungeon1.dungeonMap[1][1][0].roomMap = new roomObject[][] {
-			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Trap(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(2,1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
-			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
-			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
-			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1)}
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Trap(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new  Wall(2,1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new Floor(1,1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(2),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new   Floor(1),new Floor(1),new Floor(1),new Floor(1),new Floor(1),new    Wall(1)},
+			{new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new  Wall(1),new    Wall(1)}
 		};
 	//Initialize processes
 		//sets starting room
@@ -292,6 +329,8 @@ class roomObject {
 	static final int FLOOR = 2;
 	int subType_SpecificState = 0; //Such as Open for a door or Lit for a torch.
 	
+	int spawnObjectType = 0; //Only used in floor, for spawning specific objects/enemies in specific rooms.
+	
 	int objectType;
 	int subType;
 	int cornerX;
@@ -386,17 +425,18 @@ class Trap extends roomObject {
 }
 class Floor extends roomObject {
 	public static final int NORMAL = 1;
-	Object spawningObject;
+	
 	Floor(int type) {
 		super(FLOOR, type);
 		// TODO Auto-generated constructor stub
 	}
 	//If the floor spawns with an object on it (like an enemy), it will use this constructor
-	Floor(int type, Object spawningObject) {
+	Floor(int type, int spawnObjectType) {
 		super(FLOOR, type);
-		this.spawningObject = spawningObject;
+		this.spawnObjectType = spawnObjectType;
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 	@Override
 	void draw(Graphics g) {

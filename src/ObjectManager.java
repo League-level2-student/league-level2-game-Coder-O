@@ -2,6 +2,9 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class ObjectManager {
+	public static int ENEMY = 0;
+	public static int ITEM = 1;
+	
 	Player player = new Player(400,400);
 	static ArrayList<Projectile> playerProjectiles;
 	static ArrayList<Enemy> enemiesInRoom;
@@ -15,9 +18,8 @@ public class ObjectManager {
 	void update() {
 		player.update();
 		//staff.update();
+		enemyManaging();
 		projectileManaging();
-		
-		
 		
 		
 	}
@@ -52,6 +54,9 @@ public class ObjectManager {
 	void draw(Graphics g) {
 		//staff.draw(g);
 		player.draw(g);
+		for (Enemy enemy : enemiesInRoom) {
+			enemy.draw(g);
+		}
 		for (Projectile projectile : playerProjectiles) {
 			projectile.draw(g);
 		}

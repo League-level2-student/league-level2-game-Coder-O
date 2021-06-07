@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class Player extends Entity {
 	public static final int[] playerIntersects_Room = {roomObject.WALL, roomObject.TRAP};
+	public static final int[] playerIntersects_Entity = {ENEMY, PROJECTILE};
+	
 	static boolean fireballInPlay = false;
 	static int health;
 	static final int MAX_HEALTH = 3;
