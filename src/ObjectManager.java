@@ -6,59 +6,38 @@ public class ObjectManager {
 	public static int ITEM = 1;
 	
 	Player player = new Player(400,400);
-	static ArrayList<Projectile> playerProjectiles;
-	static ArrayList<Enemy> enemiesInRoom;
+	static ArrayList<Entity> loadedEntities;
 	//Staff staff = new Staff(player);
 	
 	ObjectManager() {
-		playerProjectiles = new ArrayList<Projectile>();
-		enemiesInRoom = new ArrayList<Enemy>();
+		loadedEntities = new ArrayList<Entity>();
 	}
 	
 	void update() {
 		player.update();
 		//staff.update();
-		enemyManaging();
-		projectileManaging();
+		ArrayList<Integer> indexsToRemove = new ArrayList<Integer>();
+		for (Entity entity : loadedEntities) {
+			entity.update();
+			if(!entity.isActive) {
+				indexsToRemove.add(entity.indexInArray);
+			}
+		}
+		for (int index : indexsToRemove) {
+			loadedEntities.remove(index);
+		}
+		indexsToRemove.clear();
 		
 		
 	}
 	
-	void projectileManaging() {
-		ArrayList<Integer> indexsToRemove = new ArrayList<Integer>();
-		for (Projectile projectile : playerProjectiles) {
-			projectile.update();
-			if(!projectile.isActive) {
-				indexsToRemove.add(projectile.indexInArray);
-			}
-		}
-		for (int index : indexsToRemove) {
-			playerProjectiles.remove(index);
-		}
-		indexsToRemove.clear();
-	}
 	
-	void enemyManaging() {
-		ArrayList<Integer> indexsToRemove = new ArrayList<Integer>();
-		for (Enemy enemy : enemiesInRoom) {
-			enemy.update();
-			if(!enemy.isActive) {
-				indexsToRemove.add(enemy.indexInArray);
-			}
-		}
-		for (int index : indexsToRemove) {
-			enemiesInRoom.remove(index);
-		}
-		indexsToRemove.clear();
-	}
+	
 	void draw(Graphics g) {
 		//staff.draw(g);
 		player.draw(g);
-		for (Enemy enemy : enemiesInRoom) {
-			enemy.draw(g);
-		}
-		for (Projectile projectile : playerProjectiles) {
-			projectile.draw(g);
+		for (Entity entity : loadedEntities) {
+			entity.draw(g);
 		}
 	}
 	

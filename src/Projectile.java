@@ -2,12 +2,10 @@ import java.awt.Graphics;
 
 public abstract class Projectile extends Entity {
 	
-	int indexInArray;
 	
 	
-	Projectile(int x, int y, int width, int height, int speed, int direction, int indexInArray, int[] roomObjectIntersects) {
-		super(x, y, width, height, speed, PROJECTILE, direction, roomObjectIntersects);
-		this.indexInArray = indexInArray;
+	Projectile(int x, int y, int width, int height, int speed, int direction, int indexInArray, int[] roomObjectIntersects, int[] entityIntersects) {
+		super(x, y, width, height, speed, PROJECTILE, direction, roomObjectIntersects, entityIntersects, indexInArray);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -35,11 +33,11 @@ public abstract class Projectile extends Entity {
 		super.update();
 	}
 
-	@Override
-	void intersectActions_Room(roomObject roomObject) {
-		// TODO Auto-generated method stub
-		
-	}
 	
+	@Override
+	void takeDamage() {
+		// TODO Auto-generated method stub
+		this.isActive = false;
+	}
 
 }

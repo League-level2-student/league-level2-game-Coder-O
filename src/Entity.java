@@ -31,8 +31,10 @@ public abstract class Entity {
 	Rectangle collisionBox;
 	
 	int[] roomIntersects;
+	int[] entityIntersects;
+	int indexInArray;
 	
-	Entity(int x, int y, int width, int height, int speed, int type, int direction, int[] roomIntersects) {
+	Entity(int x, int y, int width, int height, int speed, int type, int direction, int[] roomIntersects, int[] entityIntersects, int indexInArray) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -41,6 +43,8 @@ public abstract class Entity {
 		this.direction = direction;
 		this.type = type;
 		this.roomIntersects = roomIntersects;
+		this.entityIntersects = entityIntersects;
+		this.indexInArray = indexInArray;
 		collisionBox = new Rectangle(x, y, width, height);
 		
 		
@@ -64,6 +68,14 @@ public abstract class Entity {
 				}
 			}
 		}
+		
+		for (Entity entity : ObjectManager.loadedEntities) {
+			for(int i = 0; i < entityIntersects.length; i++) {
+				if(testIntersection(collisionBox, entity.collisionBox)&&entityIntersects[i]==entity.type) {
+					intersectActions_Entity(entity);
+				}
+			}
+		}
 		//System.out.println("Update");
 		
 	}
@@ -74,6 +86,8 @@ public abstract class Entity {
 	
 	//Called when the entity intersects with a room object. Determines what to do. Meant to be overridden.
 	abstract void intersectActions_Room(roomObject roomObject);
+	
+	abstract void intersectActions_Entity(Entity entity);
 		
 		
 	
@@ -117,4 +131,6 @@ public abstract class Entity {
 	    }
 		//collisionBox.x=x;
 	}
+	
+	abstract void takeDamage();
 }

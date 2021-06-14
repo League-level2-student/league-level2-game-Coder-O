@@ -1,4 +1,4 @@
-import java.awt.Color;
+/*import java.awt.Color;            /////// No longer used. Keeping code in case I decide to add it in later.////////
 import java.awt.Graphics;
 
 public class Staff extends Entity {
@@ -28,4 +28,4 @@ public class Staff extends Entity {
 		
 	}
 
-}
+}*/

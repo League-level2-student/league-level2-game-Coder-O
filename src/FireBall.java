@@ -9,7 +9,7 @@ public class FireBall extends Projectile {
 	
 	
 	FireBall(int x, int y, int direction, int indexInArray) {
-		super(x, y, 15, 15, 15, direction, indexInArray,fireBallIntersects_Room);
+		super(x, y, 15, 15, 15, direction, indexInArray,fireBallIntersects_Room, fireBallIntersects_Entity);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -29,15 +29,27 @@ public class FireBall extends Projectile {
 	void intersectActions_Room(roomObject roomObject) {
 		// TODO Auto-generated method stub
 		if (roomObject.objectType == roomObject.WALL) {
-			explode();
+			takeDamage();
 			if(roomObject.subType==Wall.TORCH && roomObject.subType_SpecificState != Wall.ON_OR_OPEN) {
 				roomObject.subType_SpecificState = Wall.ON_OR_OPEN;
 			}
 		}
 	}
 	
-	void explode() {
-		isActive=false;
-		Player.fireballInPlay = false;
+	@Override
+	void intersectActions_Entity(Entity entity) {
+		// TODO Auto-generated method stub
+		if(entity.type==ENEMY) {
+			entity.takeDamage();
+			takeDamage();
+		}
 	}
+	
+	@Override
+	void takeDamage() {
+		// TODO Auto-generated method stub
+		Player.fireballInPlay = false;
+		super.takeDamage();
+	}
+	
 }

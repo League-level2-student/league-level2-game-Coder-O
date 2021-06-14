@@ -135,12 +135,12 @@ public class RoomManager {
 	void initRoom() {
 		//Initializes things like enemies, which reset every time the room switches.
 		initializedRoom = true;
-		ObjectManager.enemiesInRoom.clear();
+		ObjectManager.loadedEntities.clear();
 		for(roomObject[] row : loadedRoom.roomMap) {
 			for(roomObject object : row) {
 				if(object.spawnObjectType != 0) {
 					if(object.spawnObjectType == Enemy.EYERIS) {
-						ObjectManager.enemiesInRoom.add(new Eyeris(object.cornerX, object.cornerY, ObjectManager.enemiesInRoom.size()));
+						ObjectManager.loadedEntities.add(new Eyeris(object.cornerX, object.cornerY, ObjectManager.loadedEntities.size()));
 					}
 					//Other enemies will go here.
 					

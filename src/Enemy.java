@@ -2,12 +2,10 @@ import java.awt.Graphics;
 
 public abstract class Enemy extends Entity {
 	public static final int EYERIS = 1;
-	int indexInArray;
 	
-	Enemy(int x, int y, int width, int height, int speed, int direction, int[] roomIntersects, int indexInArray) {
-		super(x, y, width, height, speed, ENEMY, direction, roomIntersects);
+	Enemy(int x, int y, int width, int height, int speed, int direction, int[] roomIntersects, int[] entityIntersects, int indexInArray) {
+		super(x, y, width, height, speed, ENEMY, direction, roomIntersects, entityIntersects, indexInArray);
 		// TODO Auto-generated constructor stub
-		this.indexInArray = indexInArray;
 	}
 
 	@Override
@@ -19,6 +17,11 @@ public abstract class Enemy extends Entity {
 	void intersectActions_Room(roomObject roomObject) {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	void takeDamage() {
+		// TODO Auto-generated method stub
+		this.isActive = false;
 	}
 
 }
