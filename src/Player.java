@@ -15,7 +15,7 @@ public class Player extends Entity {
 	static final int MAX_REPRESS_MOVEMENT = 20; //The amount of invurnability time it takes to regain movment capabilities.
 	
 	Player(int x, int y) {
-		super(x, y, 50, 50, 5, PLAYER, Entity.UP, playerIntersects_Room,playerIntersects_Entity,0);  //Assuming player will always start out at the same size
+		super(x, y, 50, 50, 5, PLAYER, UP, playerIntersects_Room, playerIntersects_Entity);  //Assuming player will always start out at the same size
 		health = MAX_HEALTH;
 		invurnalbilityTimer = 0;
 		// TODO Auto-generated constructor stub
@@ -147,7 +147,7 @@ public class Player extends Entity {
 	
 	void fireBall() {
 		if(!fireballInPlay) {
-			ObjectManager.loadedEntities.add(new FireBall(x,y,direction,ObjectManager.loadedEntities.size()));
+			ObjectManager.entitiesToAdd.add(new FireBall(x,y,direction));
 			fireballInPlay=true;
 		}
 	}

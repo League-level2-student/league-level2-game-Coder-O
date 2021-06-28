@@ -3,8 +3,8 @@ import java.awt.Graphics;
 public abstract class Enemy extends Entity {
 	public static final int EYERIS = 1;
 	
-	Enemy(int x, int y, int width, int height, int speed, int direction, int[] roomIntersects, int[] entityIntersects, int indexInArray) {
-		super(x, y, width, height, speed, ENEMY, direction, roomIntersects, entityIntersects, indexInArray);
+	Enemy(int x, int y, int width, int height, int speed, int direction, int[] roomIntersects, int[] entityIntersects) {
+		super(x, y, width, height, speed, ENEMY, direction, roomIntersects, entityIntersects);
 		// TODO Auto-generated constructor stub
 	}
 

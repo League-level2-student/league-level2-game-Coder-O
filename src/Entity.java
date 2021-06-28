@@ -34,7 +34,7 @@ public abstract class Entity {
 	int[] entityIntersects;
 	int indexInArray;
 	
-	Entity(int x, int y, int width, int height, int speed, int type, int direction, int[] roomIntersects, int[] entityIntersects, int indexInArray) {
+	Entity(int x, int y, int width, int height, int speed, int type, int direction, int[] roomIntersects, int[] entityIntersects) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -44,7 +44,6 @@ public abstract class Entity {
 		this.type = type;
 		this.roomIntersects = roomIntersects;
 		this.entityIntersects = entityIntersects;
-		this.indexInArray = indexInArray;
 		collisionBox = new Rectangle(x, y, width, height);
 		
 		
@@ -76,6 +75,15 @@ public abstract class Entity {
 				}
 			}
 		}
+		
+		for(int i = 0; i < entityIntersects.length; i++) {
+			if(entityIntersects[i] == PLAYER) {
+				if(testIntersection(collisionBox, ObjectManager.player.collisionBox)) {
+					intersectActions_Entity(ObjectManager.player);
+				}
+			}
+		}
+		
 		//System.out.println("Update");
 		
 	}

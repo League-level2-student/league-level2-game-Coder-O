@@ -1,15 +1,16 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class FireBall extends Projectile {
+public class EyeBlast extends Projectile {
 	
-	public static final int[] fireBallIntersects_Room = {roomObject.WALL, };
-	public static final int[] fireBallIntersects_Entity = {ENEMY, };
+	public static final int[] eyeBlastIntersects_Room = {roomObject.WALL, };
+	public static final int[] eyeBlastIntersects_Entity = {PLAYER, };
 	
+	Eyeris source;
 	
-	
-	FireBall(int x, int y, int direction) {
-		super(x, y, 15, 15, 15, direction,fireBallIntersects_Room, fireBallIntersects_Entity);
+	EyeBlast(int x, int y, int direction, Eyeris source) {
+		super(x, y, 15, 15, 15, direction, eyeBlastIntersects_Room, eyeBlastIntersects_Entity);
+		this.source = source;
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -21,7 +22,7 @@ public class FireBall extends Projectile {
 	@Override
 	void draw(Graphics g) {
 		// TODO Auto-generated method stub
-		g.setColor(Color.RED);
+		g.setColor(Color.YELLOW);
 		super.draw(g);
 	}
 	
@@ -30,16 +31,13 @@ public class FireBall extends Projectile {
 		// TODO Auto-generated method stub
 		if (roomObject.objectType == roomObject.WALL) {
 			takeDamage();
-			if(roomObject.subType==Wall.TORCH && roomObject.subType_SpecificState != Wall.ON_OR_OPEN) {
-				roomObject.subType_SpecificState = Wall.ON_OR_OPEN;
-			}
 		}
 	}
 	
 	@Override
 	void intersectActions_Entity(Entity entity) {
 		// TODO Auto-generated method stub
-		if(entity.type==ENEMY) {
+		if(entity.type==PLAYER) {
 			entity.takeDamage();
 			takeDamage();
 		}
@@ -48,7 +46,7 @@ public class FireBall extends Projectile {
 	@Override
 	void takeDamage() {
 		// TODO Auto-generated method stub
-		Player.fireballInPlay = false;
+		source.eyeBlastInPlay = false;
 		super.takeDamage();
 	}
 	

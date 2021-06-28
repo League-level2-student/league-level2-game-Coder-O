@@ -4,8 +4,8 @@ public abstract class Projectile extends Entity {
 	
 	
 	
-	Projectile(int x, int y, int width, int height, int speed, int direction, int indexInArray, int[] roomObjectIntersects, int[] entityIntersects) {
-		super(x, y, width, height, speed, PROJECTILE, direction, roomObjectIntersects, entityIntersects, indexInArray);
+	Projectile(int x, int y, int width, int height, int speed, int direction, int[] roomObjectIntersects, int[] entityIntersects) {
+		super(x, y, width, height, speed, PROJECTILE, direction, roomObjectIntersects, entityIntersects);
 		// TODO Auto-generated constructor stub
 	}
 	

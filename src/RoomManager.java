@@ -140,7 +140,7 @@ public class RoomManager {
 			for(roomObject object : row) {
 				if(object.spawnObjectType != 0) {
 					if(object.spawnObjectType == Enemy.EYERIS) {
-						ObjectManager.loadedEntities.add(new Eyeris(object.cornerX, object.cornerY, ObjectManager.loadedEntities.size()));
+						ObjectManager.entitiesToAdd.add(new Eyeris(object.cornerX, object.cornerY));
 					}
 					//Other enemies will go here.
 					
