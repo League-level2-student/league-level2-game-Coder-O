@@ -32,7 +32,6 @@ public abstract class Entity {
 	
 	int[] roomIntersects;
 	int[] entityIntersects;
-	int indexInArray;
 	
 	Entity(int x, int y, int width, int height, int speed, int type, int direction, int[] roomIntersects, int[] entityIntersects) {
 		this.x = x;

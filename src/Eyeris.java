@@ -2,15 +2,20 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import javax.swing.Timer;
+
 public class Eyeris extends Enemy {
 	//Eye-like turret Enemy. Stays in place, shoots lasers at player
 	public static final int[] eyerisIntersects_Room = {}; //An Eyeris will never move, so it has no room intersects.
 	public static final int[] eyerisIntersects_Entity = {};
 	
+	int eyeBlastCooldown;
+	
 	public boolean eyeBlastInPlay = false;
 	
 	Eyeris(int x, int y) {
 		super(x, y, Room.roomObjectSize, Room.roomObjectSize, 0, UP, eyerisIntersects_Room, eyerisIntersects_Entity);
+		eyeBlastCooldown = 0;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -29,6 +34,10 @@ public class Eyeris extends Enemy {
 			} else {  //Player is above Eyeris (can't be on Eyeris);
 				eyeBlast(UP);
 			}
+		}
+		
+		if(eyeBlastCooldown>0) {
+			eyeBlastCooldown--;
 		}
 		
 		super.update();
@@ -54,9 +63,10 @@ public class Eyeris extends Enemy {
 	}
 	
 	void eyeBlast(int direction) {
-		if(!eyeBlastInPlay) {
+		if(!eyeBlastInPlay&&eyeBlastCooldown==0) {
 			ObjectManager.entitiesToAdd.add(new EyeBlast(x, y, direction, this));
 			eyeBlastInPlay = true;
+			eyeBlastCooldown = 120;
 		}
 	}
 

@@ -21,11 +21,14 @@ public class ObjectManager {
 		//staff.update();
 		
 		ArrayList<Integer> indexsToRemove = new ArrayList<Integer>();
+		int i = 0; //Acts as the variable in a for(int i = 0; i++...) loop without reformatting the pre-existing loop.
 		for (Entity entity : loadedEntities) {
+			
 			entity.update();
 			if(!entity.isActive) {
-				indexsToRemove.add(entity.indexInArray);
+				indexsToRemove.add(i);
 			}
+			i++;
 		}
 		for (int index : indexsToRemove) {
 			loadedEntities.remove(index);
@@ -33,7 +36,6 @@ public class ObjectManager {
 		indexsToRemove.clear();
 		
 		for (Entity entity : entitiesToAdd) {
-			entity.indexInArray = loadedEntities.size();
 			loadedEntities.add(entity);
 		}
 		entitiesToAdd.clear();
